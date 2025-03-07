@@ -7,3 +7,23 @@ class HeartRate(models.Model):
     diastolic = models.PositiveSmallIntegerField()
     pulse = models.PositiveSmallIntegerField()
     measured_in = models.DateTimeField()
+
+    def __str__(self):
+        return f"{self.user} systolic is {self.systolic}, diastolic is {self.diastolic}, pulse is {self.pulse}"
+
+    def to_dict(self):
+        return {
+            'user': self.user,
+            'systolic': self.systolic,
+            'diastolic': self.diastolic,
+            'pulse': self.pulse,
+            'date': self.measured_in
+        }
+
+    @property
+    def get_pulse(self):
+        return self.pulse
+
+    @property
+    def get_heartrate(self):
+        return (self.systolic, self.diastolic)

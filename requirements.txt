@@ -3,3 +3,4 @@ django-debug-toolbar>=5.0.1
 django-extensions>=3.2.3
 django-htmx>=1.21.0
 django-widget-tweaks>=1.5.0
+dj_database_url>=2.3.0
