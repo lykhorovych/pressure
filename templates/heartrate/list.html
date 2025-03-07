@@ -1,0 +1,18 @@
+{% for heartrate in heartrates%}
+<div>
+    <tr>
+        <td>
+            <label for="systolic">
+            <input type="text" value="{{heartrate.systolic}}" id="systolic"/>
+            </label>
+            <label for="diastolic"></label>
+            <input type="text" value="{{heartrate.diastolic}}" id="diastolic" />
+            </label>
+            <label for="pulse">
+            <input type="text" value="{{heartrate.pulse}}" id="pulse" />
+            </label>
+        </td>
+    </tr>
+</div>
+
+{% endfor %}

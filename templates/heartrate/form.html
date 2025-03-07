@@ -1,0 +1,15 @@
+{% load widget_tweaks %}
+
+<div class="flex flex-col items-center pt-8">
+    <form action="" method="post" class="form-control max-w-md mx-auto">
+        {% csrf_token %} {% render_field form.systolic class="input input-primary mb-4" %} {% render_field form.diastolic class="input input-primary mb-4" %} {% render_field form.pulse class="input input-primary mb-8" %} {% if form.password.errors %}
+        <div class="error">
+            {% for error in form.password.errors %}
+            <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
