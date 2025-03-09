@@ -14,3 +14,7 @@ hello.py
 .vscode
 .ropeproject
 uv.lock
+heartrate/management/
+heartrate/scripts/
+heartrate.json
+start.py

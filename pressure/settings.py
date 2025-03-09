@@ -9,13 +9,14 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
-from pathlib import Path
 import os
+from pathlib import Path
+from dotenv import load_dotenv
 import dj_database_url
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+load_dotenv(BASE_DIR / ".env.prod")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -26,8 +27,11 @@ SECRET_KEY = 'django-insecure-jg0unp6crk2y-2m1$%z!dz)!40g-rtv@2j7zz*y6_@0u^%(xc7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.getenv('DEBUG', 1))
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '']
+INTERNAL_IPS = (
+    '127.0.0.1',
+    'localhost:8000',
+)
 
 # Application definition
 
@@ -78,6 +82,14 @@ WSGI_APPLICATION = 'pressure.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {}
+DATABASES['test'] = {
+    'ENGINE': 'django.db.backends.sqlite3',
+    'NAME': BASE_DIR / 'db.sqlite3',
+}
+DATABASES['product'] = dj_database_url.config(
+    conn_max_age=600,
+    conn_health_checks=True,
+)
 if DEBUG:
     DATABASES['default'] = {
         'ENGINE': 'django.db.backends.sqlite3',
