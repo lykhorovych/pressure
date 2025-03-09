@@ -29,7 +29,7 @@ DEBUG = int(os.getenv('DEBUG', 1))
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'pressure-production.up.railway.app']
 
-CSRF_TRUSTED_ORIGINS = ['pressure-production.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://pressure-production.up.railway.app']
 
 INTERNAL_IPS = (
     '127.0.0.1',
