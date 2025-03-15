@@ -8,6 +8,9 @@ class HeartRate(models.Model):
     pulse = models.PositiveSmallIntegerField()
     measured_in = models.DateTimeField()
 
+    class Meta:
+        ordering = ['-measured_in', ]
+
     def __str__(self):
         return f"{self.user} systolic is {self.systolic}, diastolic is {self.diastolic}, pulse is {self.pulse}"
 
