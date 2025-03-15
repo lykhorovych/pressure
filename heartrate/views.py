@@ -9,6 +9,12 @@ from heartrate.models import HeartRate, User
 # Create your views here.
 @login_required(login_url="login/")
 def index(request):
+
+    context = {'form': HeartRateForm()}
+    return render(request, 'index.html', context)
+
+
+def add_rate(request):
     if request.method == 'POST':
         form = HeartRateForm(request.POST)
         if form.is_valid():
@@ -24,16 +30,15 @@ def index(request):
                 user=User.objects.get(username=request.user)
             )
             obj.save()
-            return redirect('index')
+            context = {'heartrate': obj, 'form': HeartRateForm()}
+            return render(request, 'heartrate/heartrate.html', context)
         else:
             context = {
                 'form': form,
             }
-        return render(request, 'index.html', context)
-    context = {
-        'form': HeartRateForm(),
-    }
-    return render(request, 'index.html', context)
+        return render(request, 'heartrate/form.html', context)
+
+
 
 def get_list(request):
     heartrates = HeartRate.objects.filter(user=request.user)

@@ -1,3 +1,22 @@
+<template>
+<tr hx-swap-oob="afterbegin:#table tbody">
+    <td>
+        <label for="systolic">
+            <input type="text" value="{{heartrate.systolic}}" id="systolic"/>
+        </label>
+        <label for="diastolic"></label>
+            <input type="text" value="{{heartrate.diastolic}}" id="diastolic" />
+        </label>
+        <label for="pulse">
+            <input type="text" value="{{heartrate.pulse}}" id="pulse" />
+        </label>
+        <label for="pulse">
+            <input type="text" value="{{heartrate.measured_in|date:'d-m-Y H:i'}}" id="pulse" />
+        </label>
+    </td>
+</tr>
+</template>
+
 {% load widget_tweaks %}
 
 <div class="flex flex-col items-center pt-8">
