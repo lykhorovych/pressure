@@ -1,0 +1,47 @@
+services:
+  db:
+    image: postgres
+    container_name: pressure_postgres_db
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_PASSWORD: "example"
+      POSTGRES_USER: "postgres"
+      POSTGRES_DB: "postgres"
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - project_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 1s
+      timeout: 5s
+      retries: 10
+
+  web:
+    build:
+      context: .
+    container_name: pressure_web
+    ports:
+      - "8000:8000" # стандартний формат запису портового мапінгу – HOST:CONTAINER
+        # 8000 зовнішній порт через який можна здійнити доступ до сервісу, 80 - внутрішній порт контейнера
+        # відповідно в Dockerfile ми показуємо цей 80 порт
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - ./.env.dev
+    networks:
+      - project_network
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+networks:
+  project_network:
+    driver: bridge

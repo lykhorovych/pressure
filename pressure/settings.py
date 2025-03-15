@@ -13,7 +13,7 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 import dj_database_url
-
+from django.urls import reverse_lazy
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / ".env.prod")
@@ -22,12 +22,12 @@ load_dotenv(BASE_DIR / ".env.prod")
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-jg0unp6crk2y-2m1$%z!dz)!40g-rtv@2j7zz*y6_@0u^%(xc7'
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = int(os.getenv('DEBUG', 1))
+DEBUG = int(os.getenv('DEBUG', 1)) == True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'pressure-production.up.railway.app']
+ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS').split(' ')
 
 CSRF_TRUSTED_ORIGINS = ['https://pressure-production.up.railway.app']
 
@@ -130,7 +130,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Kyiv'
 
 USE_I18N = True
 
@@ -148,6 +148,8 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-LOGIN_URL = "login"
+LOGIN_URL = reverse_lazy("login")
 
-LOGIN_REDIRECT_URL = "index"
+LOGIN_REDIRECT_URL = reverse_lazy("index")
+
+CORS_ALLOW_ALL_ORIGINS = True

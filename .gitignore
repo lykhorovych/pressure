@@ -18,3 +18,4 @@ heartrate/management/
 heartrate/scripts/
 heartrate.json
 start.py
+pgdata/

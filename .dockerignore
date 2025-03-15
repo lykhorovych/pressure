@@ -1,0 +1,12 @@
+.venv
+.gitignore
+Dockerfile
+.dockerignore
+.env.prod
+.python-version
+db.sqlite3
+pgdata/
+.vscode/
+.ropeproject/
+__pycache__/
+start.py
