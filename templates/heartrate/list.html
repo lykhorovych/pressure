@@ -1,5 +1,5 @@
 <div class="overflow-x-auto">
-    <table class="table table-pin-rows">
+    <table class="table table-pin-rows table-sm rounded-box border border-base-content/5 bg-base-100">
         <thead>
             <tr>
                 <th>Systolic</th><th>Diastolic</th><th>Pulse</th><th>Data</th>
@@ -9,18 +9,16 @@
             {% for heartrate in heartrates%}
                     <tr>
                         <td>
-                            <label for="systolic">
-                                <input type="text" value="{{heartrate.systolic}}" id="systolic"/>
-                            </label>
-                            <label for="diastolic"></label>
-                                <input type="text" value="{{heartrate.diastolic}}" id="diastolic" />
-                            </label>
-                            <label for="pulse">
-                                <input type="text" value="{{heartrate.pulse}}" id="pulse" />
-                            </label>
-                            <label for="pulse">
-                                <input type="text" value="{{heartrate.measured_in|date:'d-m-Y H:i'}}" id="pulse" />
-                            </label>
+                                {{heartrate.systolic}}
+                        </td>
+                        <td>
+                                {{heartrate.diastolic}}
+                        </td>
+                        <td>
+                                {{heartrate.pulse}}
+                        </td>
+                        <td>
+                                {{heartrate.measured_in|date:'d-m-Y H:i'}}
                         </td>
                     </tr>
                 </div>

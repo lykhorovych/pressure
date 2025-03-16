@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 <p class="flex flex-col items-center">Показники тиску для користувача {{request.user}}</p>
-<div id="form">{% include 'heartrate/form.html' %}</div>
+<div class="mb-16" id="form">{% include 'heartrate/form.html' %}</div>
 <div id="table" hx-get="{% url 'list' %}" hx-trigger="load" hx-swap="innerHTML">{% include 'heartrate/list.html' %}</div>
 
 {% endblock %}
