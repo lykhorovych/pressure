@@ -1,20 +1,21 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
+from django.http import HttpRequest, HttpResponse
 
-import heartrate
 from heartrate.forms import HeartRateForm
 from heartrate.models import HeartRate, User
 
+
 # Create your views here.
 @login_required(login_url="login/")
-def index(request):
+def index(request: HttpRequest) -> HttpResponse:
 
     context = {'form': HeartRateForm()}
     return render(request, 'index.html', context)
 
 
-def add_rate(request):
+def add_rate(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST':
         form = HeartRateForm(request.POST)
         if form.is_valid():
@@ -39,8 +40,7 @@ def add_rate(request):
         return render(request, 'heartrate/form.html', context)
 
 
-
-def get_list(request):
+def get_list(request: HttpRequest) -> HttpResponse:
     heartrates = HeartRate.objects.filter(user=request.user)
     print(heartrates)
     context = {
