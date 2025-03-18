@@ -23,6 +23,7 @@ services:
   web:
     build:
       context: .
+    restart: unless-stopped
     container_name: pressure_web
     ports:
       - "8000:8000" # стандартний формат запису портового мапінгу – HOST:CONTAINER
