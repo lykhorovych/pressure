@@ -19,3 +19,5 @@ heartrate/scripts/
 heartrate.json
 start.py
 pgdata/
+Dockerfile
+docker-compose.yml
